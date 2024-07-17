@@ -1,0 +1,1 @@
+# stackx_respositorio_de_apoio_modulo_stackxlab

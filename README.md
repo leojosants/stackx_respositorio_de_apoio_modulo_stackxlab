@@ -4,3 +4,4 @@
 
 ### Propostas de Tarefas
 - [Blog](https://github.com/leojosants/stackx_respositorio_de_apoio_modulo_stackxlab/tree/main/blog)
+- [Calculadora](https://github.com/leojosants/stackx_respositorio_de_apoio_modulo_stackxlab/tree/main/calculadora)

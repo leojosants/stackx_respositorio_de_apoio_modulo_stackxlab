@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Projeto Blog</title>
+        <link rel="stylesheet" href="./assets/css/styles.css">
+        <script type="module" src="./assets/js/index.js" defer></script>
+    </head>
+    <body>
+        <!-- header -->
+        <header>
+            <div class="class-nav class-container">
+                <a href="#" class="class-logo">LO<span>GO</span></a>
+                <a href="#" class="class-login">Login</a>
+            </div>
+        </header>
+
+        <!-- logo -->
+        <section class="class-home" id="id-home">
+            <div class="home-text class-container">
+                <h2 class="home-title">Blog</h2>
+            </div>
+        </section>
+
+        <!-- post filter -->
+         <div class="class-post-filter class-container">
+            <span class="class-filter-item" data-filter="all-categories">Todas</span>
+            <span class="class-filter-item" data-filter="category-1">Categoria 1</span>
+            <span class="class-filter-item" data-filter="category-2">Caegogia 2</span>
+            <span class="class-filter-item" data-filter="category-3">Categoria 3</span>
+            <span class="class-filter-item" data-filter="category-3">Categoria 1</span>
+         </div>
+
+        <!-- continer que abrigara os cards dinamicamente-->
+        <section class="class-post" data-container-cards></section>
+    </body>
+</html>

@@ -6,6 +6,8 @@
 }
 
 :root {
+    --color-F7D3D3: #F7D3D3;
+    --color-F7EBEB: #F7EBEB;
     --color-ffffff: #ffffff;
     --color-000000: #000000;
     --color-ffffff76: #ffffff76;
@@ -76,7 +78,6 @@ a {
     background: var(--color-ffffff76);
     opacity: 0.8;
     transition: all 300ms ease-in-out;
-    
 }
 
 .class-login:hover {
@@ -92,12 +93,38 @@ a {
     justify-content: center;
     margin-top: 6rem;
     padding: 0;
-
-    /* border: 1px solid red; */
 }
 
 .class-home-text {
     text-align: center;
 }
 
-.class-home-title {}
+.class-home-title {
+    font-size: 3.5rem;
+    font-weight: bold;
+}
+
+.class-post-filter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 1.2rem;
+    margin-top: 2rem ;
+}
+
+.class-filter-item {
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    padding: 4px 10px;
+    border-radius: 4px;
+    transition: all 300ms ease-in-out;
+    border: 1px solid var(--color-F7EBEB);
+    opacity: 0.8;
+    overflow: hidden;
+}
+
+.class-filter-item:hover {
+    border: 1px solid var(--color-F7D3D3);
+    opacity: 1;
+}

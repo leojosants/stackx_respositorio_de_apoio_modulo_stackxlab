@@ -40,3 +40,98 @@ card_data.map(
         parentCard.appendChild(cardElement);
     }
 );
+
+
+const allCards = document.querySelectorAll('[data-cards]');
+const allViews = document.querySelectorAll('[data-views]');
+const allFilters = document.querySelectorAll('[data-filter]');
+
+
+// funcoes
+const addAndRemoveClassActive = (target) => { 
+    allFilters.forEach(
+        (category) => {
+            category.classList.remove('class-active');
+        }
+    );
+
+    target.classList.add('class-active');
+};
+
+
+// filtro por categoria
+window.addEventListener(
+    'click', (event) => {
+        const target = event.target;
+        const filterCategory = target.getAttribute('data-filter');
+
+        switch (filterCategory) {
+            case 'all-categories':
+                addAndRemoveClassActive(target);
+                allCards.forEach((card) => card.style.display = 'block');
+                break;
+
+            case 'category-1':
+                addAndRemoveClassActive(target);
+
+                allCards.forEach(
+                    (card) => {
+                        if (card.getAttribute('data-category') === 'category_1') {
+                            card.style.display = 'block';
+                        }
+                        else {
+                            card.style.display = 'none';
+                        }
+                    }
+                );
+                break;
+
+            case 'category-2':
+                addAndRemoveClassActive(target);
+
+                allCards.forEach(
+                    (card) => {
+                        if (card.getAttribute('data-category') === 'category_2') {
+                            card.style.display = 'block';
+                        }
+                        else {
+                            card.style.display = 'none';
+                        }
+                    }
+                );
+                break;
+            case 'category-3':
+                addAndRemoveClassActive(target);
+
+                allCards.forEach(
+                    (card) => {
+                        if (card.getAttribute('data-category') === 'category_3') {
+                            card.style.display = 'block';
+                        }
+                        else {
+                            card.style.display = 'none';
+                        }
+                    }
+                );
+                break;
+
+            case 'category-4':
+                addAndRemoveClassActive(target);
+                
+                allCards.forEach(
+                    (card) => {
+                        if (card.getAttribute('data-category') === 'category_4') {
+                            card.style.display = 'block';
+                        }
+                        else {
+                            card.style.display = 'none';
+                        }
+                    }
+                );
+                break;
+
+            default:
+                break;
+        }
+    }
+);

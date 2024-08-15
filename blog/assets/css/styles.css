@@ -197,3 +197,7 @@ a {
 .class-active:hover {
     border: 1px solid var(--color-000000);
 }
+
+.class-individual-card {
+    max-width: 400px;
+}

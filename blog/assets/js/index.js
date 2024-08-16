@@ -55,7 +55,7 @@ const addAndRemoveClassActive = (target) => {
     target.classList.add('class-active');
 };
 
-const showIndividualCard = (category) => { 
+const showIndividualCard = (category) => {
     allCards.forEach(
         (card) => {
             if (card.getAttribute('data-category') === category) {
@@ -107,5 +107,40 @@ window.addEventListener(
             default:
                 break;
         }
+    }
+);
+
+
+// selecao de card individual
+allCards.forEach(
+    (card, indice) => {
+        card.addEventListener('click', () => {
+            const cardAttributeId = Number(card.getAttribute('data-id'));
+
+            switch (cardAttributeId) {
+                case 1:
+                    allViews.forEach((view, indice) => {
+                        if ((indice + 1) === cardAttributeId) {
+                            view.innerHTML = Number(view.innerHTML) + 1;
+                            window.localStorage.setItem('views_card_1', view.innerHTML);
+                            window.location.assign('/blog/assets/post-description/post.html');
+                            return;
+                        }
+                    });
+                    break;
+
+                case 2:
+                    break;
+
+                case 3:
+                    break;
+
+                case 4:
+                    break;
+
+                default:
+                    break;
+            }
+        });
     }
 );

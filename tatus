@@ -1,0 +1,89 @@
+[33mcommit 31b7f6bee72fdb3b9ce61eda7d923ea564749d9e[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: Leonardo Santos <leonardojosantos@gmail.com>
+Date:   Thu Aug 15 00:56:11 2024 -0300
+
+    implementado função para exibição de card individual e ajustado largura
+
+[33mcommit 5f7686c7a4fbf5a0ef1bb0f61dbee08cdd2994bf[m
+Author: Leonardo Santos <leonardojosantos@gmail.com>
+Date:   Thu Aug 15 00:24:11 2024 -0300
+
+    implementado filtro para categorias
+
+[33mcommit 55e8a0f50d8ba64dba4e3b5fca65d2572d932f5e[m
+Author: Leonardo Santos <leonardojosantos@gmail.com>
+Date:   Wed Aug 14 00:00:43 2024 -0300
+
+    tarefa blog - css parte 3 e cards dinâmicos com JS
+
+[33mcommit 31b3a79155bcab6997c4c8d11ed425b4c64fb283[m
+Author: Leonardo Santos <leonardojosantos@gmail.com>
+Date:   Tue Aug 13 00:14:50 2024 -0300
+
+    tarefa blog - css parte 2 e cards
+
+[33mcommit 45fcf4e7c1049d53534bf423222c86e6fa17a718[m
+Author: Leonardo Santos <leonardojosantos@gmail.com>
+Date:   Thu Jul 18 23:27:49 2024 -0300
+
+    tarefa blog - css parte 1
+
+[33mcommit 3995427b3a1f73c30c27cc48118733851f290db1[m
+Author: Leonardo Santos <leonardojosantos@gmail.com>
+Date:   Thu Jul 18 20:28:07 2024 -0300
+
+    Correção ortográfica
+
+[33mcommit 1b810da90cffa93925de14707a92fd7043ad9a9d[m
+Author: Leonardo Santos <90782310+leojosants@users.noreply.github.com>
+Date:   Wed Jul 17 23:47:25 2024 -0300
+
+    Update README.md
+
+[33mcommit faa9fba4f19c567458422eab8872b5771ce3ef3f[m
+Author: Leonardo Santos <leonardojosantos@gmail.com>
+Date:   Wed Jul 17 23:45:54 2024 -0300
+
+    Adicionado tarefa do projeto calculadora
+
+[33mcommit cc3700e40d3e3a1309796bb49b8cdc1f9ba25b9e[m
+Author: Leonardo Santos <90782310+leojosants@users.noreply.github.com>
+Date:   Wed Jul 17 23:17:37 2024 -0300
+
+    Update README.md
+
+[33mcommit 6263031a3047d9cd44cc3e1a9287f2d21e36a35b[m
+Author: Leonardo Santos <leonardojosantos@gmail.com>
+Date:   Wed Jul 17 23:16:02 2024 -0300
+
+    movido arquivos para raiz do projeto
+
+[33mcommit ac19b8357d86e1c8736da2d768bd78afc13e105a[m
+Author: Leonardo Santos <leonardojosantos@gmail.com>
+Date:   Wed Jul 17 23:13:09 2024 -0300
+
+    Criado diretório para o projeto blog
+
+[33mcommit 2adfe9ae593a33a700761943054afcee5165564f[m
+Author: Leonardo Santos <leonardojosantos@gmail.com>
+Date:   Wed Jul 17 22:59:21 2024 -0300
+
+    Tarefa blog - parte 1, adicionado favicon
+
+[33mcommit fb560afa2cc34ef8b6c0fd7d04c8f7b90e554122[m
+Author: Leonardo Santos <leonardojosantos@gmail.com>
+Date:   Wed Jul 17 22:34:50 2024 -0300
+
+    Tarefa blog - parte 1
+
+[33mcommit b97861fea93781efc647b1f76313557f5d1514aa[m
+Author: Leonardo Santos <90782310+leojosants@users.noreply.github.com>
+Date:   Wed Jul 17 20:29:16 2024 -0300
+
+    Update README.md
+
+[33mcommit 6d24127a181711bfb2cbf2552cfe33e48ab9f581[m
+Author: Leonardo Santos <90782310+leojosants@users.noreply.github.com>
+Date:   Wed Jul 17 20:28:20 2024 -0300
+
+    Initial commit

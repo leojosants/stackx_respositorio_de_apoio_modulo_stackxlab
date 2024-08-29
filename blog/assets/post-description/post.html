@@ -4,10 +4,43 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Document</title>
+        <link rel="stylesheet" href="../css/styles.css">
         <script src="../js/post.js" defer></script>
     </head>
     <body>
-        <h1>Aqui será carregado o post clicado</h1>
-        <a href="../../index.html">voltar para página principal</a>
+         <header>
+            <div class="class-nav class-container">
+                <a href="../../index.html" class="class-logo">lo<span>GO</span></a>
+                <a href="#" class="class-login">Login</a>
+            </div>
+        </header>
+
+        <section class="class-post-header">
+            <div class="class-header-content class-post-container" data-post-description-container>
+                <a href="../../index.html" class="class-back-home">
+                    HOME
+                </a>
+
+                <h1 class="class-header-title" data-post-title>
+                    Título do card
+                </h1>
+                
+                <img src="" alt="" class="class-header-img" data-post-header-img />
+            </div>
+        </section>
+
+        <section class="class-post-content class-post-container" data-post-content>
+            <h2 class="class-sub-heading" data-post-date>
+                Data
+            </h2>
+
+            <span class="class-sub-heading class-category">
+                Visualizações: <span data-post-views>0</span>
+            </span>
+
+            <p class="class-post-text" data-post-text>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa iste deleniti ratione eius molestiae obcaecati corporis labore, tempore quia quas, sed sit, vero maiores. Maiores quidem laboriosam eaque nobis. Dolorem!
+            </p>
+        </section>
     </body>
 </html>

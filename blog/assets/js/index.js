@@ -68,6 +68,17 @@ const showIndividualCard = (category) => {
     );
 };
 
+const loadIdividualCard = (cardAttributeId, localStorageKeyName) => {
+    allViews.forEach((view, indice) => {
+        if ((indice + 1) === cardAttributeId) {
+            view.innerHTML = Number(view.innerHTML) + 1;
+            window.localStorage.setItem(localStorageKeyName, view.innerHTML);
+            window.location.assign('/blog/assets/post-description/post.html');
+            return;
+        }
+    });
+}
+
 
 // filtro por categoria
 window.addEventListener(
@@ -119,23 +130,19 @@ allCards.forEach(
 
             switch (cardAttributeId) {
                 case 1:
-                    allViews.forEach((view, indice) => {
-                        if ((indice + 1) === cardAttributeId) {
-                            view.innerHTML = Number(view.innerHTML) + 1;
-                            window.localStorage.setItem('views_card_1', view.innerHTML);
-                            window.location.assign('/blog/assets/post-description/post.html');
-                            return;
-                        }
-                    });
+                    loadIdividualCard(cardAttributeId, 'views_card_1');
                     break;
 
                 case 2:
+                    loadIdividualCard(cardAttributeId, 'views_card_2');
                     break;
 
                 case 3:
+                    loadIdividualCard(cardAttributeId, 'views_card_3');
                     break;
 
                 case 4:
+                    loadIdividualCard(cardAttributeId, 'views_card_4');
                     break;
 
                 default:

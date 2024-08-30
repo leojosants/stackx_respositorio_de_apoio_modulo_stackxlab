@@ -68,7 +68,7 @@ const showIndividualCard = (category) => {
     );
 };
 
-const loadIdividualCard = (cardAttributeId, localStorageKeyName) => {
+const loadIndividualCard = (cardAttributeId, localStorageKeyName) => {
     allViews.forEach((view, indice) => {
         if ((indice + 1) === cardAttributeId) {
             view.innerHTML = Number(view.innerHTML) + 1;
@@ -121,28 +121,29 @@ window.addEventListener(
     }
 );
 
-
 // selecao de card individual
 allCards.forEach(
-    (card, indice) => {
+    (card, indiceCard) => {
         card.addEventListener('click', () => {
+            window.localStorage.setItem('indiceCard', (indiceCard + 1));
+
             const cardAttributeId = Number(card.getAttribute('data-id'));
 
             switch (cardAttributeId) {
                 case 1:
-                    loadIdividualCard(cardAttributeId, 'views_card_1');
+                    loadIndividualCard(cardAttributeId, 'views_card_1');
                     break;
 
                 case 2:
-                    loadIdividualCard(cardAttributeId, 'views_card_2');
+                    loadIndividualCard(cardAttributeId, 'views_card_2');
                     break;
 
                 case 3:
-                    loadIdividualCard(cardAttributeId, 'views_card_3');
+                    loadIndividualCard(cardAttributeId, 'views_card_3');
                     break;
 
                 case 4:
-                    loadIdividualCard(cardAttributeId, 'views_card_4');
+                    loadIndividualCard(cardAttributeId, 'views_card_4');
                     break;
 
                 default:

@@ -1,116 +1,157 @@
 
 import Calculator from './Calculator.js';
 
-'use strict'
+const domElements = {
+    powerBtn: document.querySelector(
+        '[data-power]'
+    ),
 
-const powerButton = document.querySelector('[data-power]');
-const equalsButton = document.querySelector('[data-equals]');
-const deleteButton = document.querySelector('[data-delete]');
-const numberButtons = document.querySelectorAll('[data-number]');
-const allClearButton = document.querySelector('[data-all-clear]');
-const history = document.querySelector('[data-history-container]');
-const operationButtons = document.querySelectorAll('[data-operator]');
-const dataContainer = document.querySelector('[data-result-date-container]');
-const currentOperandText = document.querySelector('[data-current-operation]');
-const previousOperandText = document.querySelector('[data-previous-operation]');
+    equalsBtn: document.querySelector(
+        '[data-equals]'
+    ),
+
+    deleteBtn: document.querySelector(
+        '[data-delete]'
+    ),
+
+    allNumberBtn: document.querySelectorAll(
+        '[data-number]'
+    ),
+
+    clearBtn: document.querySelector(
+        '[data-all-clear]'
+    ),
+
+    resultsHistoryContainer: document.querySelector(
+        '[data-results-history-container]'
+    ),
+
+    allOperatorBtn: document.querySelectorAll(
+        '[data-operator]'
+    ),
+
+    resultHistoryContent: document.querySelector(
+        '[data-result-history-content]'
+    ),
+
+    currentOperation: document.querySelector(
+        '[data-current-operation]'
+    ),
+
+    previousOperation: document.querySelector(
+        '[data-previous-operation]'
+    ),
+};
 
 let isCalculatorOn = false;
 
 const calculator = new Calculator(
-    previousOperandText, currentOperandText, dataContainer, history
+    domElements.previousOperation,
+    domElements.currentOperation,
+    domElements.resultHistoryContent,
 );
 
+const executeActionToPowerBtn = () => {
+    if (isCalculatorOn) {
+        const confirmationTurnOffCalculator = confirm('Realmente deseja desligar a calculadora?');
 
-numberButtons.forEach(
-    (numberButton) => {
-        numberButton.addEventListener('click', () => {
-            if (isCalculatorOn===false) {
+        if (confirmationTurnOffCalculator === false) {
+            return;
+        }
+    }
+
+    isCalculatorOn = !isCalculatorOn;
+    domElements.powerBtn.classList.toggle('class-active');
+    domElements.resultsHistoryContainer.classList.toggle('class-hide');
+    !isCalculatorOn ? location.reload() : '';
+};
+
+const executeActionToAllNumberBtn = (number) => {
+    number.addEventListener(
+        'click', () => {
+            if (isCalculatorOn === false) {
                 alert('Calculadora está desligada!');
                 return;
             }
-            calculator.appendNumber(numberButton.innerText);
+            // console.log(numberBtn)
+            // console.log(numberBtn.innerText)
+            calculator.appendNumber(number.innerText);
             calculator.updateDisplay();
-        })
-    }
-);
-
-deleteButton.addEventListener(
-    'click', () => {
-        if (isCalculatorOn === false) {
-            alert('Calculadora está desligada!');
-            return;
         }
-        calculator.deleteDigit();
-        calculator.updateDisplay();
-    }
-);
+    );
+};
 
-operationButtons.forEach(
-    (operation) => {
-        operation.addEventListener(
-            'click', () => {
-                if (isCalculatorOn === false) {
-                    alert('Calculadora está desligada!');
-                    return;
-                }
-                calculator.chooseOperation(operation.innerText);
-                calculator.updateDisplay();
+const executeActionToClearBtn = () => {
+    if (isCalculatorOn === false) {
+        alert('Calculadora está desligada!');
+        return;
+    }
+    calculator.clear();
+    calculator.updateDisplay();
+};
+
+const executeActionToDeleteBtn = () => {
+    if (isCalculatorOn === false) {
+        alert('Calculadora está desligada!');
+        return;
+    }
+    calculator.deleteDigit();
+    calculator.updateDisplay();
+};
+
+const executeActionToAllOperatorBtn = (operator) => {
+    operator.addEventListener(
+        'click', () => {
+            if (isCalculatorOn === false) {
+                alert('Calculadora está desligada!');
+                return;
             }
-        );
+            // console.log(operator);
+            // calculator.chooseOperation(operator);
+            calculator.chooseOperation(operator.innerText);
+            calculator.updateDisplay();
+        }
+    );
+};
+
+const executeActionToEqualsBtn = () => {
+    if (isCalculatorOn === false) {
+        alert('Calculadora está desligada!');
+        return;
     }
+    calculator.calculate();
+    calculator.updateDisplay();
+    calculator.clear();
+};
+
+const executeActionToInitialLoad = () => {
+    domElements.resultsHistoryContainer.classList.add('class-hide');
+};
+
+domElements.powerBtn.addEventListener(
+    'click', executeActionToPowerBtn
 );
 
-powerButton.addEventListener(
-    'click', () => {
-        if (isCalculatorOn) {
-            if (!confirm('Realmente deseja desligar a calculadora?')) return
-        }
-
-        isCalculatorOn = !isCalculatorOn;
-        powerButton.classList.toggle('class-active');
-        history.classList.toggle('class-hide');
-        !isCalculatorOn ? location.reload() : '';
-    }
+domElements.allNumberBtn.forEach(
+    (number) => executeActionToAllNumberBtn(number)
 );
 
-allClearButton.addEventListener(
-    'click', () => {
-        if (isCalculatorOn === false) {
-            alert('Calculadora está desligada!');
-            return;
-        }
-        calculator.clear();
-        calculator.updateDisplay();
-    }
+domElements.clearBtn.addEventListener(
+    'click', executeActionToClearBtn
 );
 
-equalsButton.addEventListener(
-    'click', () => {
-        if (isCalculatorOn === false) {
-            alert('Calculadora está desligada!');
-            return;
-        }
-
-        calculator.calcule();
-        calculator.updateDisplay();
-        calculator.clear();
-    }
+domElements.deleteBtn.addEventListener(
+    'click', executeActionToDeleteBtn
 );
 
-document.addEventListener(
-    'click', (event) => {
-        const target = event.target;
-        const parentElement = target.closest('div');
-        
-        if (target.classList.value.includes('class-result')) {
-            calculator.insertDisplay(
-                target.value.split('=')[1].trim()
-            );
-        }
+domElements.allOperatorBtn.forEach(
+    (operator) => executeActionToAllOperatorBtn(operator)
+);
 
-        if (target.classList.contains('class-delete')) {
-            if (!confirm('Realmente deseja excluir o registro?')) return;
-            parentElement.remove();
-        }
-    }
+domElements.equalsBtn.addEventListener(
+    'click', executeActionToEqualsBtn
+);
+
+window.addEventListener(
+    'DOMContentLoaded', executeActionToInitialLoad
 );

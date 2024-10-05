@@ -225,6 +225,13 @@ export default class Calculator {
 
             case operationSymbols.division:
                 // console.log(currentOperandNumber === 0);
+                if (
+                    currentOperandNumber === 0 &&
+                    previousOperandNumber === 0
+                ) {
+                    alert('Resultado indefinido!');
+                }
+
                 if (currentOperandNumber === 0) {
                     alert('Não é possível realizar divisão por ZERO!');
                     return;

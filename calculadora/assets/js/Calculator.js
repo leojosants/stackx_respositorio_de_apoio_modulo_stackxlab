@@ -243,6 +243,10 @@ export default class Calculator {
                 break;
         }
 
+        if (typeof result === 'undefined') {
+            return;
+        }
+
         // console.log(result);
         // console.log(this.currentOperand);
         this.currentOperand = result;

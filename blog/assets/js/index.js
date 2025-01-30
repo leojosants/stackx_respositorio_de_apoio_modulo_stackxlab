@@ -137,13 +137,21 @@ import { cardData } from './database.js';
             return cardItem;
         };
 
-        // filtro por categoria
+        const onClickButtonLogin = () => {
+            alert("Opção indisponível no momento.");
+        };
+
         window.addEventListener(
             'click', (event) => {
                 const target = event.target;
                 const filterCategory = target.dataset.filter;
+                const buttonLogin = target.dataset.button;
                 const allCards = querySelectorAllFn('[data-cards]');
                 const parentCard = querySelectorFn('[data-container-cards]');
+
+                if (buttonLogin === "login") {
+                    onClickButtonLogin();
+                }
 
                 switch (filterCategory) {
                     case 'all-categories':

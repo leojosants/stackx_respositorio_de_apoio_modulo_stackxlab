@@ -17,13 +17,22 @@ import { cardData } from './database.js';
                     return Number(data);
                 };
 
+                const onClickButtonLogin = () => {
+                    alert("Opção indisponível no momento.");
+                };
+
                 const postTitle = querySelectorFn('[data-post-title]');
                 const postHeaderImg = querySelectorFn('[data-post-header-img]');
                 const postDate = querySelectorFn('[data-post-date]');
                 const postViews = querySelectorFn('[data-post-views]');
                 const postText = querySelectorFn('[data-post-text]');
+                const loginButton = querySelectorFn('[data-login]');
 
                 const cardId = convertStringToNumber(getItemLocalStorage('cardId'));
+
+                loginButton.addEventListener(
+                    "click", onClickButtonLogin
+                );
 
                 cardData.forEach(
                     (data) => {

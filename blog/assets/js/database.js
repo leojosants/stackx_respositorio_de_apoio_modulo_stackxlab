@@ -1,8 +1,7 @@
-export let clickData = JSON.parse(localStorage.getItem("clickData")) || {};
+"use strict";
 
-const localStorageViews = (id) => {
-    return clickData[id] === undefined ? 0 : clickData[id];
-};
+import { getLocalStorageViews } from "../utils/get-local-storage-views.js";
+
 
 export const cardData = [
     {
@@ -18,9 +17,9 @@ export const cardData = [
             date: new Date().toLocaleDateString(),
             time: new Date().toLocaleTimeString(),
         },
-        first_characters: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit.',
+        first_characters: "Expedita nam hic accusantium consequatur, commodi ab in vitae id dolorum omnis corporis harum, consectetur quaerat. Fuga nobis neque minima doloribus ipsam?",
         description: 'Expedita nam hic accusantium consequatur, commodi ab in vitae id dolorum omnis corporis harum, consectetur quaerat. Fuga nobis neque minima doloribus ipsam?',
-        views: localStorageViews(1),
+        views: getLocalStorageViews(1),
     },
     {
         id: 2,
@@ -35,9 +34,9 @@ export const cardData = [
             date: new Date().toLocaleDateString(),
             time: new Date().toLocaleTimeString(),
         },
-        first_characters: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit.',
+        first_characters: "Expedita nam hic accusantium consequatur, commodi ab in vitae id dolorum omnis corporis harum, consectetur quaerat. Fuga nobis neque minima doloribus ipsam?",
         description: 'Expedita nam hic accusantium consequatur, commodi ab in vitae id dolorum omnis corporis harum, consectetur quaerat. Fuga nobis neque minima doloribus ipsam?',
-        views: localStorageViews(2),
+        views: getLocalStorageViews(2),
     },
     {
         id: 3,
@@ -52,9 +51,9 @@ export const cardData = [
             date: new Date().toLocaleDateString(),
             time: new Date().toLocaleTimeString(),
         },
-        first_characters: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit.',
+        first_characters: "Expedita nam hic accusantium consequatur, commodi ab in vitae id dolorum omnis corporis harum, consectetur quaerat. Fuga nobis neque minima doloribus ipsam?",
         description: 'Expedita nam hic accusantium consequatur, commodi ab in vitae id dolorum omnis corporis harum, consectetur quaerat. Fuga nobis neque minima doloribus ipsam?',
-        views: localStorageViews(3),
+        views: getLocalStorageViews(3),
     },
     {
         id: 4,
@@ -69,8 +68,8 @@ export const cardData = [
             date: new Date().toLocaleDateString(),
             time: new Date().toLocaleTimeString(),
         },
-        first_characters: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit.',
+        first_characters: "Expedita nam hic accusantium consequatur, commodi ab in vitae id dolorum omnis corporis harum, consectetur quaerat. Fuga nobis neque minima doloribus ipsam?",
         description: 'Expedita nam hic accusantium consequatur, commodi ab in vitae id dolorum omnis corporis harum, consectetur quaerat. Fuga nobis neque minima doloribus ipsam?',
-        views: localStorageViews(4),
+        views: getLocalStorageViews(4),
     },
 ];

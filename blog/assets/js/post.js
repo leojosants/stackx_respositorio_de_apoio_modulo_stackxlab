@@ -1,40 +1,43 @@
 "use strict";
 
+import { getItemLocalStorage } from '../utils/get-item-local-storage.js';
+
 import { cardData } from './database.js';
 
 
-const postTitle = document.querySelector(
-    '[data-post-title]'
-);
+(
+    () => {
+        window.addEventListener(
+            "DOMContentLoaded", () => {
+                const querySelectorFn = (identification) => {
+                    return document.querySelector(identification);
+                };
 
-const postHeaderImg = document.querySelector(
-    '[data-post-header-img]'
-);
+                const convertStringToNumber = (data) => {
+                    return Number(data);
+                };
 
-const postDate = document.querySelector(
-    '[data-post-date]'
-);
+                const postTitle = querySelectorFn('[data-post-title]');
+                const postHeaderImg = querySelectorFn('[data-post-header-img]');
+                const postDate = querySelectorFn('[data-post-date]');
+                const postViews = querySelectorFn('[data-post-views]');
+                const postText = querySelectorFn('[data-post-text]');
 
-const postViews = document.querySelector(
-    '[data-post-views]'
-);
-const postText = document.querySelector(
-    '[data-post-text]'
-);
+                const cardId = convertStringToNumber(getItemLocalStorage('cardId'));
 
-
-const cardId = Number(window.localStorage.getItem('cardId'));
-
-
-cardData.forEach(
-    (data) => {
-        if (data.id === cardId) {
-            postTitle.innerHTML = data.title;
-            postHeaderImg.src = data.banner.src
-            postHeaderImg.alt = data.banner.alt
-            postDate.innerHTML = `${data.date_time.date} ${data.date_time.time}`;
-            postViews.innerHTML = data.views;
-            postText.innerHTML = data.description;
-        }
+                cardData.forEach(
+                    (data) => {
+                        if (data.id === cardId) {
+                            postTitle.innerHTML = data.title;
+                            postHeaderImg.src = data.banner.src
+                            postHeaderImg.alt = data.banner.alt
+                            postDate.innerHTML = `${data.date_time.date} ${data.date_time.time}`;
+                            postViews.innerHTML = data.views;
+                            postText.innerHTML = data.description;
+                        }
+                    }
+                );
+            }
+        );
     }
-);
+)();

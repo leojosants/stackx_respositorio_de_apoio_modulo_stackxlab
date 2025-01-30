@@ -1,149 +1,203 @@
 "use strict";
 
-import { cardData, clickData } from './database.js';
+import { setItemLocalStorage } from '../utils/set-item-local-storage.js';
+import { clickData } from '../utils/get-local-storage-click-data.js';
+
+import { cardData } from './database.js';
 
 
-const parentCard = document.querySelector('[data-container-cards]');
+(
+    () => {
+        const addAndRemoveClassActive = (target) => {
+            const allFilters = querySelectorAllFn('[data-filter]');
 
-const addAndRemoveClassActive = (target) => {
-    const allFilters = document.querySelectorAll('[data-filter]');
+            allFilters.forEach(
+                (category) => removeClass(category, 'c-active')
+            );
 
-    allFilters.forEach(
-        (category) => category.classList.remove('c-active')
-    );
-    target.classList.add('c-active');
-};
+            addClass(target, 'c-active');
+        };
 
-const showIndividualCard = (category) => {
-    const allCards = document.querySelectorAll('[data-cards]');
-    allCards.forEach(
-        (card) => {
-            const filteredCategoryIsIgualCardCategory = (card.dataset.category === category);
+        const showIndividualCard = (category) => {
+            const allCards = querySelectorAllFn('[data-cards]');
 
-            if (filteredCategoryIsIgualCardCategory) {
-                card.style.display = 'block';
-                return;
-            }
-            card.style.display = 'none';
-        }
-    );
-};
+            allCards.forEach(
+                (card) => {
+                    const filteredCategoryIsIgualCardCategory = (card.dataset.category === category);
 
-const loadIndividualCard = (cardId, localStorageKeyName, url) => {
-    clickData[cardId]++;
-    localStorage.setItem(localStorageKeyName, JSON.stringify(clickData));
-    window.location.assign(url);
-}
+                    if (filteredCategoryIsIgualCardCategory) {
+                        changeStyleDisplay(card, 'block');
+                        return;
+                    }
 
-const addClass = (element, className) => {
-    element.classList.add(className);
-};
-
-const removeClass = (element, className) => {
-    element.classList.remove(className);
-};
-
-
-// filtro por categoria
-window.addEventListener(
-    'click', (event) => {
-        const target = event.target;
-        const filterCategory = target.dataset.filter;
-        const allCards = document.querySelectorAll('[data-cards]');
-
-        switch (filterCategory) {
-            case 'all-categories':
-                addAndRemoveClassActive(target);
-                allCards.forEach((card) => card.style.display = 'block');
-                removeClass(parentCard, 'c-individual-card');
-                break;
-
-            case 'category-1':
-                addAndRemoveClassActive(target);
-                showIndividualCard('category_1');
-                addClass(parentCard, 'c-individual-card');
-                break;
-
-            case 'category-2':
-                addAndRemoveClassActive(target);
-                showIndividualCard('category_2');
-                addClass(parentCard, 'c-individual-card');
-                break;
-
-            case 'category-3':
-                addAndRemoveClassActive(target);
-                showIndividualCard('category_3');
-                addClass(parentCard, 'c-individual-card');
-                break;
-
-            case 'category-4':
-                addAndRemoveClassActive(target);
-                showIndividualCard('category_4');
-                addClass(parentCard, 'c-individual-card');
-                break;
-
-            default:
-                break;
-        }
-    }
-);
-
-// criando cards
-window.addEventListener(
-    "DOMContentLoaded", () => {
-        cardData.map(
-            (data) => {
-                if (!clickData[data.id]) {
-                    clickData[data.id] = 0;
+                    changeStyleDisplay(card, 'none');
                 }
+            );
+        };
 
-                const template = document.querySelector("[data-template]").content;
-                const cardItem = template.querySelector("[data-cards]").cloneNode(true);
+        const loadIndividualCard = (cardId, localStorageKeyName, url) => {
+            clickData[cardId]++;
+            setItemLocalStorage(localStorageKeyName, JSON.stringify(clickData));
+            window.location.assign(url);
+        }
 
-                cardItem.dataset.category = data.category
-                cardItem.dataset.id = data.id
+        const addClass = (element, className) => {
+            element.classList.add(className);
+        };
 
-                cardItem.querySelector("[data-card-img]").classList.add("c-post-img");
-                cardItem.querySelector("[data-card-img]").src = data.banner.src;
-                cardItem.querySelector("[data-card-img]").alt = data.banner.alt;
-                cardItem.querySelector("[data-card-category]").textContent = data.display_category;
-                cardItem.querySelector("[data-card-title]").textContent = data.title;
-                cardItem.querySelector("[data-card-date-time]").textContent = `${data.date_time.date} - ${data.date_time.time}`;
-                cardItem.querySelector("[data-card-views]").textContent = data.views;
-                cardItem.querySelector("[data-card-description]").textContent = data.description;
+        const removeClass = (element, className) => {
+            element.classList.remove(className);
+        };
 
-                cardItem.addEventListener(
-                    "click", () => {
-                        const url = "/blog/assets/post-description/post.html";
-                        const cardId = Number(cardItem.dataset.id);
-                        const localStorageKeyName = "clickData";
+        const changeStyleDisplay = (element, value) => {
+            element.style.display = value;
+        };
 
-                        window.localStorage.setItem('cardId', cardId);
+        const querySelectorAllFn = (identification) => {
+            return document.querySelectorAll(identification);
+        };
 
-                        switch (cardId) {
-                            case 1:
-                                loadIndividualCard(cardId, localStorageKeyName, url);
-                                break;
+        const querySelectorFn = (identification) => {
+            return document.querySelector(identification);
+        };
 
-                            case 2:
-                                loadIndividualCard(cardId, localStorageKeyName, url);
-                                break;
+        const convertStringToNumber = (data) => {
+            return Number(data);
+        };
 
-                            case 3:
-                                loadIndividualCard(cardId, localStorageKeyName, url);
-                                break;
-                            case 4:
-                                loadIndividualCard(cardId, localStorageKeyName, url);
-                                break;
+        const createCard = (data) => {
+            const template = document.querySelector("[data-template]").content;
+            const cardItem = template.querySelector("[data-cards]").cloneNode(true);
 
-                            default:
-                                break;
+            cardItem.dataset.category = data.category
+            cardItem.dataset.id = data.id
+
+            cardItem
+                .querySelector("[data-card-img]")
+                .classList
+                .add("c-post-img");
+
+            cardItem
+                .querySelector("[data-card-img]")
+                .setAttribute("src", data.banner.src);
+
+            cardItem
+                .querySelector("[data-card-img]")
+                .setAttribute("alt", data.banner.alt);
+
+            cardItem
+                .querySelector("[data-card-category]")
+                .textContent = data.display_category;
+
+            cardItem
+                .querySelector("[data-card-title]")
+                .textContent = data.title;
+
+            cardItem
+                .querySelector("[data-card-date-time]")
+                .textContent = `${data.date_time.date} - ${data.date_time.time}`;
+
+            cardItem
+                .querySelector("[data-card-views]")
+                .textContent = data.views;
+
+            cardItem
+                .querySelector("[data-card-description]")
+                .textContent = data.description;
+
+            cardItem.addEventListener(
+                "click", () => {
+                    const url = "/blog/assets/post-description/post.html";
+                    const cardId = convertStringToNumber(cardItem.dataset.id);
+
+                    setItemLocalStorage('cardId', cardId);
+
+                    switch (cardId) {
+                        case 1:
+                            loadIndividualCard(cardId, "clickData", url);
+                            break;
+
+                        case 2:
+                            loadIndividualCard(cardId, "clickData", url);
+                            break;
+
+                        case 3:
+                            loadIndividualCard(cardId, "clickData", url);
+                            break;
+                        case 4:
+                            loadIndividualCard(cardId, "clickData", url);
+                            break;
+
+                        default:
+                            break;
+                    }
+                }
+            );
+
+            return cardItem;
+        };
+
+        // filtro por categoria
+        window.addEventListener(
+            'click', (event) => {
+                const target = event.target;
+                const filterCategory = target.dataset.filter;
+                const allCards = querySelectorAllFn('[data-cards]');
+                const parentCard = querySelectorFn('[data-container-cards]');
+
+                switch (filterCategory) {
+                    case 'all-categories':
+                        addAndRemoveClassActive(target);
+                        allCards.forEach((card) => card.style.display = 'block');
+                        removeClass(parentCard, 'c-individual-card');
+                        break;
+
+                    case 'category-1':
+                        addAndRemoveClassActive(target);
+                        showIndividualCard('category_1');
+                        addClass(parentCard, 'c-individual-card');
+                        break;
+
+                    case 'category-2':
+                        addAndRemoveClassActive(target);
+                        showIndividualCard('category_2');
+                        addClass(parentCard, 'c-individual-card');
+                        break;
+
+                    case 'category-3':
+                        addAndRemoveClassActive(target);
+                        showIndividualCard('category_3');
+                        addClass(parentCard, 'c-individual-card');
+                        break;
+
+                    case 'category-4':
+                        addAndRemoveClassActive(target);
+                        showIndividualCard('category_4');
+                        addClass(parentCard, 'c-individual-card');
+                        break;
+
+                    default:
+                        break;
+                }
+            }
+        );
+
+        // criando cards
+        window.addEventListener(
+            "DOMContentLoaded", () => {
+                cardData.map(
+                    (data) => {
+                        if (!clickData[data.id]) {
+                            clickData[data.id] = 0;
                         }
+
+                        const newCard = createCard(data);
+                        const parentCard = querySelectorFn('[data-container-cards]');
+
+                        parentCard.appendChild(newCard);
                     }
                 );
-
-                parentCard.appendChild(cardItem);
             }
         );
     }
-);
+)();

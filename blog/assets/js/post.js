@@ -1,4 +1,4 @@
-import { card_data } from './database.js';
+import { cardData } from './database.js';
 
 
 const postTitle = document.querySelector(
@@ -24,23 +24,14 @@ const postText = document.querySelector(
 const indiceCard = Number(window.localStorage.getItem('indiceCard'));
 
 
-card_data.forEach(
+cardData.forEach(
     (data) => {
         if (data.id === indiceCard) {
             postTitle.innerHTML = data.title;
-
-            postHeaderImg.setAttribute(
-                'src', data.banner.src
-            );
-
-            postHeaderImg.setAttribute(
-                'alt', data.banner.alt
-            );
-
+            postHeaderImg.src = data.banner.src
+            postHeaderImg.alt = data.banner.alt
             postDate.innerHTML = `${data.date_time.date} ${data.date_time.time}`;
-
             postViews.innerHTML = data.views;
-
             postText.innerHTML = data.description;
         }
     }

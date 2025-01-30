@@ -1,10 +1,14 @@
-import { card_data } from './database.js';
+import { cardData, clickData } from './database.js';
 
 const parentCard = document.querySelector('[data-container-cards]');
 
 // criando cards
-card_data.map(
+cardData.map(
     (data) => {
+        if (!clickData[data.id]) {
+            clickData[data.id] = 0;
+        }
+
         const cardElement = document.createElement('div');
         cardElement.classList.add('class-post-box');
         cardElement.setAttribute('data-cards', '');
@@ -68,12 +72,12 @@ const showIndividualCard = (category) => {
     );
 };
 
-const loadIndividualCard = (cardAttributeId, localStorageKeyName) => {
-    allViews.forEach((view, indice) => {
+const loadIndividualCard = (cardAttributeId, localStorageKeyName, url) => {
+    allViews.forEach((_view, indice) => {
         if ((indice + 1) === cardAttributeId) {
-            view.innerHTML = Number(view.innerHTML) + 1;
-            window.localStorage.setItem(localStorageKeyName, view.innerHTML);
-            window.location.assign('/blog/assets/post-description/post.html');
+            clickData[cardAttributeId]++;
+            localStorage.setItem(localStorageKeyName, JSON.stringify(clickData));
+            window.location.assign(url);
             return;
         }
     });
@@ -131,19 +135,27 @@ allCards.forEach(
 
             switch (cardAttributeId) {
                 case 1:
-                    loadIndividualCard(cardAttributeId, 'views_card_1');
+                    loadIndividualCard(
+                        cardAttributeId, "clickData", "/blog/assets/post-description/post.html"
+                    );
                     break;
 
                 case 2:
-                    loadIndividualCard(cardAttributeId, 'views_card_2');
+                    loadIndividualCard(
+                        cardAttributeId, "clickData", "/blog/assets/post-description/post.html"
+                    );
                     break;
 
                 case 3:
-                    loadIndividualCard(cardAttributeId, 'views_card_3');
+                    loadIndividualCard(
+                        cardAttributeId, "clickData", "/blog/assets/post-description/post.html"
+                    );
                     break;
 
                 case 4:
-                    loadIndividualCard(cardAttributeId, 'views_card_4');
+                    loadIndividualCard(
+                        cardAttributeId, "clickData", "/blog/assets/post-description/post.html"
+                    );
                     break;
 
                 default:

@@ -1,4 +1,10 @@
-export const card_data = [
+export let clickData = JSON.parse(localStorage.getItem("clickData")) || {};
+
+const localStorageViews = (id) => {
+    return clickData[id] === undefined ? 0 : clickData[id];
+};
+
+export const cardData = [
     {
         id: 1,
         banner: {
@@ -14,7 +20,7 @@ export const card_data = [
         },
         first_characters: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit.',
         description: 'Expedita nam hic accusantium consequatur, commodi ab in vitae id dolorum omnis corporis harum, consectetur quaerat. Fuga nobis neque minima doloribus ipsam?',
-        views: localStorage.getItem('views_card_1') || '0',
+        views: localStorageViews(1),
     },
     {
         id: 2,
@@ -31,7 +37,7 @@ export const card_data = [
         },
         first_characters: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit.',
         description: 'Expedita nam hic accusantium consequatur, commodi ab in vitae id dolorum omnis corporis harum, consectetur quaerat. Fuga nobis neque minima doloribus ipsam?',
-        views: localStorage.getItem('views_card_2') || '0',
+        views: localStorageViews(2),
     },
     {
         id: 3,
@@ -48,7 +54,7 @@ export const card_data = [
         },
         first_characters: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit.',
         description: 'Expedita nam hic accusantium consequatur, commodi ab in vitae id dolorum omnis corporis harum, consectetur quaerat. Fuga nobis neque minima doloribus ipsam?',
-        views: localStorage.getItem('views_card_3') || '0',
+        views: localStorageViews(3),
     },
     {
         id: 4,
@@ -65,6 +71,6 @@ export const card_data = [
         },
         first_characters: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit.',
         description: 'Expedita nam hic accusantium consequatur, commodi ab in vitae id dolorum omnis corporis harum, consectetur quaerat. Fuga nobis neque minima doloribus ipsam?',
-        views: localStorage.getItem('views_card_4') || '0',
+        views: localStorageViews(4),
     },
 ];

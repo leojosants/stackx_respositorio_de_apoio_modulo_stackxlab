@@ -1,3 +1,5 @@
+"use strict";
+
 import { cardData } from './database.js';
 
 
@@ -21,12 +23,12 @@ const postText = document.querySelector(
 );
 
 
-const indiceCard = Number(window.localStorage.getItem('indiceCard'));
+const cardId = Number(window.localStorage.getItem('cardId'));
 
 
 cardData.forEach(
     (data) => {
-        if (data.id === indiceCard) {
+        if (data.id === cardId) {
             postTitle.innerHTML = data.title;
             postHeaderImg.src = data.banner.src
             postHeaderImg.alt = data.banner.alt

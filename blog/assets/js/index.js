@@ -1,122 +1,85 @@
+"use strict";
+
 import { cardData, clickData } from './database.js';
+
 
 const parentCard = document.querySelector('[data-container-cards]');
 
-// criando cards
-cardData.map(
-    (data) => {
-        if (!clickData[data.id]) {
-            clickData[data.id] = 0;
-        }
-
-        const cardElement = document.createElement('div');
-        cardElement.classList.add('class-post-box');
-        cardElement.setAttribute('data-cards', '');
-        cardElement.setAttribute('data-category', data.category);
-        cardElement.setAttribute('data-id', data.id);
-
-        cardElement.innerHTML = `
-            <img class="class-post-img" src="${data.banner.src}">
-            
-            <h2 class="class-category">
-                ${data.display_category}
-            </h2>
-            
-            <p class="class-post-title">
-                ${data.title}
-            </p>
-
-            <span class="class-post-date" data-date>
-                ${data.date_time.date} - ${data.date_time.time}
-            </span>
-
-            <br />
-
-            <span class="class-category">
-                Visualizações: <span data-views>${data.views}</span>
-            </span>
-
-            <p class="class-post-description">
-                ${data.description}
-            </p>
-        `;
-
-        parentCard.appendChild(cardElement);
-    }
-);
-
-
-const allCards = document.querySelectorAll('[data-cards]');
-const allViews = document.querySelectorAll('[data-views]');
-const allFilters = document.querySelectorAll('[data-filter]');
-
-
-// funcoes
 const addAndRemoveClassActive = (target) => {
+    const allFilters = document.querySelectorAll('[data-filter]');
+
     allFilters.forEach(
-        (category) => category.classList.remove('class-active')
+        (category) => category.classList.remove('c-active')
     );
-    target.classList.add('class-active');
+    target.classList.add('c-active');
 };
 
 const showIndividualCard = (category) => {
+    const allCards = document.querySelectorAll('[data-cards]');
     allCards.forEach(
         (card) => {
-            if (card.getAttribute('data-category') === category) {
+            const filteredCategoryIsIgualCardCategory = (card.dataset.category === category);
+
+            if (filteredCategoryIsIgualCardCategory) {
                 card.style.display = 'block';
+                return;
             }
-            else {
-                card.style.display = 'none';
-            }
+            card.style.display = 'none';
         }
     );
 };
 
-const loadIndividualCard = (cardAttributeId, localStorageKeyName, url) => {
-    allViews.forEach((_view, indice) => {
-        if ((indice + 1) === cardAttributeId) {
-            clickData[cardAttributeId]++;
-            localStorage.setItem(localStorageKeyName, JSON.stringify(clickData));
-            window.location.assign(url);
-            return;
-        }
-    });
+const loadIndividualCard = (cardId, localStorageKeyName, url) => {
+    clickData[cardId]++;
+    localStorage.setItem(localStorageKeyName, JSON.stringify(clickData));
+    window.location.assign(url);
 }
+
+const addClass = (element, className) => {
+    element.classList.add(className);
+};
+
+const removeClass = (element, className) => {
+    element.classList.remove(className);
+};
 
 
 // filtro por categoria
 window.addEventListener(
     'click', (event) => {
         const target = event.target;
-        const filterCategory = target.getAttribute('data-filter');
+        const filterCategory = target.dataset.filter;
+        const allCards = document.querySelectorAll('[data-cards]');
 
         switch (filterCategory) {
             case 'all-categories':
                 addAndRemoveClassActive(target);
                 allCards.forEach((card) => card.style.display = 'block');
-                parentCard.classList.remove('class-individual-card');
+                removeClass(parentCard, 'c-individual-card');
                 break;
 
             case 'category-1':
                 addAndRemoveClassActive(target);
                 showIndividualCard('category_1');
-                parentCard.classList.add('class-individual-card');
+                addClass(parentCard, 'c-individual-card');
                 break;
 
             case 'category-2':
-                addAndRemoveClassActive(target); showIndividualCard('category_2');
-                parentCard.classList.add('class-individual-card');
+                addAndRemoveClassActive(target);
+                showIndividualCard('category_2');
+                addClass(parentCard, 'c-individual-card');
                 break;
+
             case 'category-3':
                 addAndRemoveClassActive(target);
                 showIndividualCard('category_3');
-                parentCard.classList.add('class-individual-card');
+                addClass(parentCard, 'c-individual-card');
                 break;
 
             case 'category-4':
                 addAndRemoveClassActive(target);
                 showIndividualCard('category_4');
-                parentCard.classList.add('class-individual-card');
+                addClass(parentCard, 'c-individual-card');
                 break;
 
             default:
@@ -125,42 +88,62 @@ window.addEventListener(
     }
 );
 
-// selecao de card individual
-allCards.forEach(
-    (card, indiceCard) => {
-        card.addEventListener('click', () => {
-            window.localStorage.setItem('indiceCard', (indiceCard + 1));
+// criando cards
+window.addEventListener(
+    "DOMContentLoaded", () => {
+        cardData.map(
+            (data) => {
+                if (!clickData[data.id]) {
+                    clickData[data.id] = 0;
+                }
 
-            const cardAttributeId = Number(card.getAttribute('data-id'));
+                const template = document.querySelector("[data-template]").content;
+                const cardItem = template.querySelector("[data-cards]").cloneNode(true);
 
-            switch (cardAttributeId) {
-                case 1:
-                    loadIndividualCard(
-                        cardAttributeId, "clickData", "/blog/assets/post-description/post.html"
-                    );
-                    break;
+                cardItem.dataset.category = data.category
+                cardItem.dataset.id = data.id
 
-                case 2:
-                    loadIndividualCard(
-                        cardAttributeId, "clickData", "/blog/assets/post-description/post.html"
-                    );
-                    break;
+                cardItem.querySelector("[data-card-img]").classList.add("c-post-img");
+                cardItem.querySelector("[data-card-img]").src = data.banner.src;
+                cardItem.querySelector("[data-card-img]").alt = data.banner.alt;
+                cardItem.querySelector("[data-card-category]").textContent = data.display_category;
+                cardItem.querySelector("[data-card-title]").textContent = data.title;
+                cardItem.querySelector("[data-card-date-time]").textContent = `${data.date_time.date} - ${data.date_time.time}`;
+                cardItem.querySelector("[data-card-views]").textContent = data.views;
+                cardItem.querySelector("[data-card-description]").textContent = data.description;
 
-                case 3:
-                    loadIndividualCard(
-                        cardAttributeId, "clickData", "/blog/assets/post-description/post.html"
-                    );
-                    break;
+                cardItem.addEventListener(
+                    "click", () => {
+                        const url = "/blog/assets/post-description/post.html";
+                        const cardId = Number(cardItem.dataset.id);
+                        const localStorageKeyName = "clickData";
 
-                case 4:
-                    loadIndividualCard(
-                        cardAttributeId, "clickData", "/blog/assets/post-description/post.html"
-                    );
-                    break;
+                        window.localStorage.setItem('cardId', cardId);
 
-                default:
-                    break;
+                        switch (cardId) {
+                            case 1:
+                                loadIndividualCard(cardId, localStorageKeyName, url);
+                                break;
+
+                            case 2:
+                                loadIndividualCard(cardId, localStorageKeyName, url);
+                                break;
+
+                            case 3:
+                                loadIndividualCard(cardId, localStorageKeyName, url);
+                                break;
+                            case 4:
+                                loadIndividualCard(cardId, localStorageKeyName, url);
+                                break;
+
+                            default:
+                                break;
+                        }
+                    }
+                );
+
+                parentCard.appendChild(cardItem);
             }
-        });
+        );
     }
 );

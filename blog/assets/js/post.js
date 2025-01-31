@@ -9,10 +9,6 @@ import { cardData } from './database.js';
     () => {
         window.addEventListener(
             "DOMContentLoaded", () => {
-                const querySelectorFn = (identification) => {
-                    return document.querySelector(identification);
-                };
-
                 const convertStringToNumber = (data) => {
                     return Number(data);
                 };
@@ -21,14 +17,39 @@ import { cardData } from './database.js';
                     alert("Opção indisponível no momento.");
                 };
 
-                const postTitle = querySelectorFn('[data-post-title]');
-                const postHeaderImg = querySelectorFn('[data-post-header-img]');
-                const postDate = querySelectorFn('[data-post-date]');
-                const postViews = querySelectorFn('[data-post-views]');
-                const postText = querySelectorFn('[data-post-text]');
-                const loginButton = querySelectorFn('[data-login]');
+                const createCard = (data) => {
+                    const template = window.document.querySelector("[data-template-post-description]").content;
+                    const cardItem = template.querySelector("[data-post]").cloneNode(true);
+
+                    cardItem
+                        .querySelector("[data-post-title]")
+                        .textContent = data.title;
+
+                    cardItem
+                        .querySelector("[data-post-header-img]")
+                        .src = data.banner.src;
+
+                    cardItem
+                        .querySelector("[data-post-header-img]")
+                        .alt = data.banner.alt;
+
+                    cardItem
+                        .querySelector("[data-post-date-time]")
+                        .textContent = `${data.date_time.date} ${data.date_time.time}`;
+
+                    cardItem
+                        .querySelector("[data-post-views]")
+                        .textContent = data.views;
+
+                    cardItem
+                        .querySelector("[data-post-text]")
+                        .textContent = data.description;
+
+                    return cardItem;
+                };
 
                 const cardId = convertStringToNumber(getItemLocalStorage('cardId'));
+                const loginButton = window.document.querySelector('[data-login]');
 
                 loginButton.addEventListener(
                     "click", onClickButtonLogin
@@ -37,12 +58,9 @@ import { cardData } from './database.js';
                 cardData.forEach(
                     (data) => {
                         if (data.id === cardId) {
-                            postTitle.innerHTML = data.title;
-                            postHeaderImg.src = data.banner.src
-                            postHeaderImg.alt = data.banner.alt
-                            postDate.innerHTML = `${data.date_time.date} ${data.date_time.time}`;
-                            postViews.innerHTML = data.views;
-                            postText.innerHTML = data.description;
+                            const newCard = createCard(data);
+                            const mainContainer = window.document.querySelector("[data-main-container]");
+                            mainContainer.appendChild(newCard);
                         }
                     }
                 );
